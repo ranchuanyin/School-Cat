@@ -47,9 +47,6 @@ public class AuthorizeInterceptor implements HandlerInterceptor {
             redisCache.setCacheObject(loginsAndTasks,loginAndRun,24, TimeUnit.HOURS);
             redisCache.incrementValue("LoginNum",1);
         }
-        //结束
-        request.getSession().setAttribute("account", account);
-        request.getSession().setAttribute("state",loginAndRun);
         return true;
     }
 }
