@@ -14,7 +14,7 @@ public class CountController {
 
     @GetMapping("/num")
     public RestBean<Integer> num(){
-        Integer loginNum = redisCache.getCacheObject("LoginNum", Integer.class);
+        Integer loginNum = redisCache.getCacheObject("LoginNum");
 
         return RestBean.success(loginNum);
     }

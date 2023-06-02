@@ -27,7 +27,7 @@ public class UserController {
         Authentication authentication = context.getAuthentication();
         User account = (User)authentication.getPrincipal();
         String loginUser = "login:"+account.getCatAccount().getId();
-        CatAccount cacheObject = redisCache.getCacheObject(loginUser, CatAccount.class);
+        CatAccount cacheObject = redisCache.getCacheObject(loginUser);
         return RestBean.success(cacheObject);
     }
 

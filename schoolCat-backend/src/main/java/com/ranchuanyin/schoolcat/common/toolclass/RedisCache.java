@@ -73,16 +73,10 @@ public class RedisCache
      * @param key 缓存键值
      * @return 缓存键值对应的数据
      */
-    public <T> T getCacheObject(final String key,Class<T> type)
+    public <T> T getCacheObject(final String key)
     {
         ValueOperations<String, T> operation = redisTemplate.opsForValue();
-        if (Objects.isNull(operation.get(key))){
-            return null;
-        }
-
-        String cacheKey = Objects.requireNonNull(operation.get(key)).toString();
-        return JSONObject.parseObject(cacheKey, type);
-
+        return operation.get(key);
     }
 
     public Long incrementValue(String key, long delta) {

@@ -36,7 +36,7 @@ public class AuthorizeInterceptor implements HandlerInterceptor {
         User account = (User)authentication.getPrincipal();
         //登录量计数
         String loginsAndTasks = account.getCatAccount().getId().toString()+"Task";
-        LoginAndRun loginAndRun = redisCache.getCacheObject(loginsAndTasks,LoginAndRun.class);
+        LoginAndRun loginAndRun = redisCache.getCacheObject(loginsAndTasks);
         if (Objects.isNull(loginAndRun)){
             loginAndRun = new LoginAndRun();
             loginAndRun.setId(account.getCatAccount().getId());

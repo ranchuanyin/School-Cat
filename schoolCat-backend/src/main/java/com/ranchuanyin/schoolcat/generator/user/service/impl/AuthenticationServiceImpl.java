@@ -56,7 +56,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new UsernameNotFoundException("用户名或者密码错误");
         }
         String loginUser = "login:"+catAccount.getId();
-        if (Objects.isNull(redisCache.getCacheObject(loginUser,CatAccount.class))){
+        if (Objects.isNull(redisCache.getCacheObject(loginUser))){
             redisCache.setCacheObject(loginUser,catAccount,30,TimeUnit.SECONDS);
         }
         return new User(catAccount);
