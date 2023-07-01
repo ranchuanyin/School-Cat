@@ -1,7 +1,6 @@
 <template>
     <el-row justify="start">
         <el-col>
-
             <el-row>
                 <el-col :span="16">
                     <el-carousel :interval="4000" type="card" height="40vh">
@@ -51,6 +50,7 @@
                     </div>
                 </el-col>
             </el-row>
+
 
         </el-col>
     </el-row>

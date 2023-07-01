@@ -5,10 +5,11 @@ import com.ranchuanyin.schoolcat.generator.user.domain.CatAccount;
 
 import com.ranchuanyin.schoolcat.generator.user.mapper.CatAccountMapper;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpSession;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+
 import org.springframework.stereotype.Component;
 
 import java.util.*;

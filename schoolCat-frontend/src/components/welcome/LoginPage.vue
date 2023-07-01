@@ -66,6 +66,8 @@ const login = () => {
             }, () => {
                 store.auth.user = null
             })
+        },(message) => {
+            ElMessage.warning(message)
         })
     }
 }

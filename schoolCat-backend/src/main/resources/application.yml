@@ -40,6 +40,3 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
     cache-enabled: true
-ranchuanyin:
-  username : 1
-  password : 2
