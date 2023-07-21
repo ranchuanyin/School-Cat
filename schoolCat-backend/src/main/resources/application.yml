@@ -7,11 +7,11 @@ spring:
     banner-mode: off
   mail:
     host: smtp.163.com
-    username: cqiecat121@163.com
-    password: OMDTPIXTPSIYZMNH
+    username: xxxxxxx
+    password: xxxxxxx
     port: 465
     properties:
-      from: cqiecat121@163.com
+      from: xxxxxxx@163.com
       mail:
         smtp:
           socketFactory:
@@ -20,9 +20,9 @@ spring:
     auto: true
   data:
     redis:
-      host: 43.138.61.70         # Redis服务器地址
+      host: xxxxxxx         # Redis服务器地址
       port: 6379              # Redis服务器连接端口
-      password: 1213707943
+      password: xxxxxxx
       database: 0
   devtools:
     restart:
