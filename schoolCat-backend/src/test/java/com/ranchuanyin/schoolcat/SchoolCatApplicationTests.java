@@ -6,7 +6,6 @@ import com.ranchuanyin.schoolcat.generator.user.mapper.CatAccountMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +21,7 @@ class SchoolCatApplicationTests {
 
     @Test
     void contextLoads() {
-        List<CatAccount> list = redisCache.getCacheList("list",CatAccount.class);
-        list.forEach(System.out::println);
+       catAccountMapper.selectById(1);
     }
 
     @Test

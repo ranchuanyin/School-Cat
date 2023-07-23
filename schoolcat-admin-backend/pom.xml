@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>schoolcat</artifactId>
+    <artifactId>schoolcat-admin-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>schoolcat</name>
     <description>schoolcat</description>

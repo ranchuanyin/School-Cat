@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/School-Cat.iml" filepath="$PROJECT_DIR$/School-Cat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolCat-backend/schoolCat-backend.iml" filepath="$PROJECT_DIR$/schoolCat-backend/schoolCat-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/schoolCat-frontend/schoolCat-frontend.iml" filepath="$PROJECT_DIR$/schoolCat-frontend/schoolCat-frontend.iml" />
     </modules>
   </component>

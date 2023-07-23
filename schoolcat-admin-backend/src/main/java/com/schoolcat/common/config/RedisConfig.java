@@ -1,4 +1,4 @@
-package com.schoolcat.config;
+package com.schoolcat.common.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
