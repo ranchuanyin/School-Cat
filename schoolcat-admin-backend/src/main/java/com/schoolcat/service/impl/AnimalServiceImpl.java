@@ -22,13 +22,22 @@ public class AnimalServiceImpl extends ServiceImpl<AnimalMapper, Animal> impleme
 
     //MybatisPlus方法
     @Override
-    public int addAnimals(Animal animal) {
-        return animalMapper.insert(animal);
+    public int saveAnimals(Animal animal) {
+        if (animal.getId() == null) {
+            return animalMapper.insert(animal);
+        } else {
+            return animalMapper.update(animal);
+        }
     }
 
-    //MybatisPlus方法
     @Override
-    public int updateAnimalInformation(Animal animal) {
-        return animalMapper.updateById(animal);
+    public List<Animal> selectPage(Integer pageNum, Integer pageSize) {
+        return animalMapper.selectPage(pageNum, pageSize);
     }
+
+    @Override
+    public Integer selectCount() {
+        return animalMapper.selectCount();
+    }
+
 }

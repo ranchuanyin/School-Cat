@@ -3,6 +3,50 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.schoolcat.mapper.AnimalMapper">
+    <select id="findAll" resultType="com.schoolcat.entity.Animal">
+        SELECT *
+        from school_animal
+    </select>
 
+    <insert id="insert">
+        INSERT INTO school_animal(animalName, animalCharacter, place, relationship) VALUE (#{animalName}, #{animalCharacter}, #{place}, #{relationship})
+    </insert>
 
+    <update id="update">
+        UPDATE school_animal
+        <set>
+            <if test="animalName !== null">
+                animalName = #{animalName}
+            </if>
+            <if test="animalName !== null">
+                animalName = #{animalName}
+            </if>
+            <if test="animalCharacter !== null">
+                animalCharacter = #{animalCharacter}
+            </if>
+            <if test="place !== place">
+                place = #{place}
+            </if>
+            <if test="relationship !== relationship">
+                relationship = #{relationship}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from school_animal
+        where id = #{id}
+    </delete>
+
+    <select id="selectPage" resultType="com.schoolcat.entity.Animal">
+        select * school_animal
+        limit #{pageNum}, #{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="integer">
+        SELECT COUNT(*)
+        FROM school_animal
+    </select>
 </mapper>
