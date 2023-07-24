@@ -11,9 +11,13 @@
         <module name="schoolCat-backend" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="schoolCat-admin-backend" target="19" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="schoolCat-admin-backend" options="-parameters" />
       <module name="schoolCat-backend" options="-parameters" />
       <module name="schoolcat-admin-backend" options="-parameters" />
     </option>
