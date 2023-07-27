@@ -1,9 +1,12 @@
 package com.schoolcat.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.schoolcat.entity.Adoptions;
 import com.schoolcat.entity.Animal;
 import com.schoolcat.req.AnimalReq;
+import com.schoolcat.resp.CommonResp;
 import com.schoolcat.resp.PageResp;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
@@ -17,4 +20,6 @@ public interface AnimalService extends IService<Animal> {
 
 
     PageResp<Animal> getList(AnimalReq animalReq);
+
+    CommonResp<String> adoptionUp(Adoptions adoptions, HttpSession session);
 }
