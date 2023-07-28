@@ -39,6 +39,11 @@ public class User implements Serializable {
     private Integer userSex;
 
     /**
+     * 用户真实姓名
+     */
+    private String userRealname;
+
+    /**
      * 用户手机号
      */
     private String userPhone;
@@ -49,7 +54,7 @@ public class User implements Serializable {
     private String userAddress;
 
     /**
-     * 用户状态，0未申领，1申领中
+     * 用户状态，0未申领，1申领中,2暂停使用
      */
     private Integer userStatus;
 
@@ -57,4 +62,5 @@ public class User implements Serializable {
      * 用户类型，0普通用户，1管理员，2领养人
      */
     private Integer userType;
+
 }
