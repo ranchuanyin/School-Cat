@@ -3,6 +3,7 @@ import LoginPage from "@/components/welcome/LoginPage.vue";
 import Welcome from "@/views/Welcome.vue";
 import RegisterPage from "@/components/welcome/RegisterPage.vue";
 import {useStore} from "@/stores";
+import Curd from "@/views/Curd.vue"
 
 
 const router = createRouter({
@@ -36,7 +37,12 @@ const router = createRouter({
         path: '',
         name: 'catIndex',
         component: () => import('@/components/catIndex/CatIndex.vue')
-      }]
+      },
+        {
+          path: '/crud',
+          name:'curd',
+          component: Curd
+        }]
     }
   ]
 })
