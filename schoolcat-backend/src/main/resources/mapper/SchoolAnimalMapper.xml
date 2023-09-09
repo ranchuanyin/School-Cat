@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ranchuanyin.schoolcat.user.mapper.SchoolAnimalMapper">
+
+    <resultMap id="BaseResultMap" type="com.ranchuanyin.schoolcat.domain.SchoolAnimal">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="place" column="place" jdbcType="VARCHAR"/>
+        <result property="relationship" column="relationship" jdbcType="VARCHAR"/>
+        <result property="image" column="image" jdbcType="VARCHAR"/>
+        <result property="score" column="score" jdbcType="DOUBLE"/>
+        <result property="animalName" column="animal_Name" jdbcType="VARCHAR"/>
+        <result property="animalCharacter" column="animal_Character" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,place,relationship,
+        image,animal_Name,animal_Character
+    </sql>
+</mapper>

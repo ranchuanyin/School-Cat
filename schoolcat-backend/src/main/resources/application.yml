@@ -1,0 +1,51 @@
+spring:
+  datasource:
+    username: root
+    password: 1213707943
+    url: jdbc:mysql://43.138.61.70:3306/school_cat?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    hikari:
+      max-lifetime: 120000
+  main:
+    banner-mode: off
+  mail:
+    host: smtp.163.com
+    username: cqiecat121@163.com
+    password: OMDTPIXTPSIYZMNH
+    port: 465
+    properties:
+      from: cqiecat121@163.com
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  aop:
+    auto: true
+  data:
+    redis:
+      host: 43.138.61.70         # Redis服务器地址
+      port: 6379              # Redis服务器连接端口
+      password: 1213707943
+      database: 0
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      exclude: WEB-INF/**
+    freemarker:
+      cache: false
+
+
+mybatis-plus:
+  global-config:
+    banner: false
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+JWT:
+  saltValue: 1213707943ran
+OSS:
+  AK: 9g2JLTudll3waD_HTA8faQcskTO-1azJFsl8OGDA
+  SK: bGeeGL9As7iH6PNFD2txhE3bazQTqLxYyiQp3xXz
+  bucket: schoolcat
+  url: https://cdn.ourcats.top/
