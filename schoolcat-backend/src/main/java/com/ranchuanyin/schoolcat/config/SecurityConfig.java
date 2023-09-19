@@ -6,7 +6,6 @@ import com.ranchuanyin.schoolcat.domain.CatAccount;
 import com.ranchuanyin.schoolcat.domain.User;
 import com.ranchuanyin.schoolcat.domain.vo.CatAccountVO;
 import com.ranchuanyin.schoolcat.enums.SchoolCatRedisCacheEnums;
-import com.ranchuanyin.schoolcat.filter.AuthorizeFilter;
 import com.ranchuanyin.schoolcat.filter.JWTCalibrationFilter;
 import com.ranchuanyin.schoolcat.mapper.CatAccountMapper;
 import com.ranchuanyin.schoolcat.service.impl.AuthenticationServiceImpl;
@@ -23,7 +22,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -53,8 +51,6 @@ public class SecurityConfig {
     private DataSource dataSource;
     @Resource
     private JWTCalibrationFilter jwtCalibrationFilter;
-    @Resource
-    private AuthorizeFilter authorizeFilter;
     @Resource
     private CatAccountMapper mapper;
 
@@ -118,7 +114,6 @@ public class SecurityConfig {
                 .tokenValiditySeconds(3600 * 24 * 7)
                 .and()
                 .addFilterBefore(jwtCalibrationFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(authorizeFilter, JWTCalibrationFilter.class)
                 .build();
     }
 
