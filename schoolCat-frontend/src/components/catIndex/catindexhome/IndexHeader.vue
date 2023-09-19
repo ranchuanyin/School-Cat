@@ -1,16 +1,12 @@
 <template>
     <el-row justify="start">
         <el-col :span="8">
-            <iframe class="hidden-sm-and-down" frameborder="0" height="60" hspace="0" scrolling="no"
-                    src="https://i.tianqi.com/?c=code&a=getcode&id=35&site=34&icon=1"
-                    width="400"></iframe>
+
         </el-col>
         <el-col :span="8" style="margin-top: 10px;">
-            <form>
                 <label for="search">Search</label>
-                <input id="search" v-model="" class="input" pattern=".*\S.*" required="" type="search">
+                <input @keyup.enter="router.push(`/cat/search/${searchValue}`)" id="search" v-model="searchValue" class="input" pattern=".*\S.*" required="" type="search">
                 <span class="caret"></span>
-            </form>
         </el-col>
 
         <el-col :span="5" style="margin-top: 15px;">
@@ -33,7 +29,9 @@
                                       fill="#2c2c2c" p-id="4986"></path>
                             </svg>
                             <el-col style="">
+                              <n-badge :offset="[3, -17]" :value="messageList.length" :max="15">
                                 <el-text size="small">消息</el-text>
+                              </n-badge>
                             </el-col>
                         </el-row>
                         <template #dropdown>
@@ -50,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div class="card__content">
-
+                                    <el-card shadow="hover" v-for="message in messageList"> {{ message.message }} </el-card>
                                 </div>
                             </div>
                         </template>
@@ -150,54 +148,57 @@
 </template>
 
 <script setup>
-import {NSwitch} from "naive-ui"
-import {onMounted, ref} from 'vue'
+import {NSwitch,NBadge} from "naive-ui"
+import {onMounted, ref,watch} from 'vue'
 import {SwitchButton} from '@element-plus/icons-vue'
 import {get} from "@/net";
 import {ElMessage} from "element-plus";
 import router from "@/router";
-
 import {useStore} from "@/stores";
+const props = defineProps(["messageList"])
+const messageList = props.messageList
+
+watch(
+    () => messageList.length,
+    () => console.log(messageList)
+)
 
 const store = useStore()
 onMounted(() => {
     computeLv(store.auth.user["experience"])
-    /*get('/cat/common/count', (data) => {
-        store.loginNum.loginNum = data.data
-    })*/
 })
 const username = ref(store.auth.user.username)
 //计算Lv等级
 const percentage = ref(0)
 const Lv = ref("LV 1")
 const computeLv = (experience) => {
-    let lv = experience / 100
-    switch (parseInt(String(lv))) {
+  let lv = experience / 100
+  switch (parseInt(String(lv))) {
 
-        case 1:
-            Lv.value = 'Lv 1'
-            percentage.value = Math.round(experience / 200 * 100)
-            break;
-        case 2:
-        case 3:
-            Lv.value = 'Lv 2'
-            percentage.value = Math.round((experience - 200) / 200 * 100)
-            break;
-        case 4:
-        case 5:
-            Lv.value = 'Lv 3'
-            percentage.value = Math.round((experience - 400) / 200 * 100)
-            break;
-        case 6:
-        case 7:
-            Lv.value = 'Lv 4'
-            percentage.value = Math.round((experience - 600) / 100 * 100)
-            break;
-        case 8:
-            Lv.value = 'Lv 5'
-            percentage.value = Math.round((experience - 700) / 100 * 100)
-            break;
-    }
+    case 1:
+      Lv.value = 'Lv 1'
+      percentage.value = Math.round(experience / 200 * 100)
+      break;
+    case 2:
+    case 3:
+      Lv.value = 'Lv 2'
+      percentage.value = Math.round((experience - 200) / 200 * 100)
+      break;
+    case 4:
+    case 5:
+      Lv.value = 'Lv 3'
+      percentage.value = Math.round((experience - 400) / 200 * 100)
+      break;
+    case 6:
+    case 7:
+      Lv.value = 'Lv 4'
+      percentage.value = Math.round((experience - 600) / 100 * 100)
+      break;
+    case 8:
+      Lv.value = 'Lv 5'
+      percentage.value = Math.round((experience - 700) / 100 * 100)
+      break;
+  }
 }
 
 const customColors = [
@@ -210,9 +211,11 @@ const customColors = [
 
 const changeShow = () => {
     store.isShowBarrage.isShowBarrage = !store.isShowBarrage.isShowBarrage
-    console.log(store.isShowBarrage.isShowBarrage)
-}
 
+}
+/**
+ * logout退出登录方法
+ */
 const logout = () => {
     get('/cat/auth/logout', (data) => {
         store.auth.user = null
@@ -240,6 +243,11 @@ const railStyle = ({
     }
     return style;
 }
+
+/**
+ * 搜索绑定的ref
+ */
+const searchValue = ref(null)
 </script>
 
 <style scoped>

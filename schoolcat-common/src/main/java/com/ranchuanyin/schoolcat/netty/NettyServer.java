@@ -14,6 +14,7 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,7 +123,7 @@ public class NettyServer {
         new Thread(() -> {
             try {
                 start();
-                System.out.println("服务启动成功");
+                log.info("服务启动成功");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -44,9 +44,6 @@ import {get} from "@/net";
 import {ElMessage} from "element-plus";
 import router from "@/router";
 
-onMounted(() => {
-    JWT()
-})
 
 const store = useStore()
 const barrageData = reactive({
@@ -63,14 +60,6 @@ const getBarrageData = (val) => {
     barrageData.name = val.name
 }
 
-const JWT = () => {
-    get('/cat/common/JWT', (data) => {
-
-    }, (data) => {
-        ElMessage.warning(data.message)
-        router.push("/")
-    })
-}
 </script>
 
 <style scoped>

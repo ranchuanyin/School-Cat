@@ -23,6 +23,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -97,7 +98,7 @@ public class SecurityConfig {
                 .cors().configurationSource(this.corsConfigurationSource())//配置cors跨域
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/cat/auth/**", "/cat/common/JWT").permitAll()//配置URL不需要登录就可以访问
+                .requestMatchers("/cat/auth/**").permitAll()//配置URL不需要登录就可以访问
                 .anyRequest()
                 .authenticated()
                 .and()

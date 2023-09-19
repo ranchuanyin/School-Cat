@@ -44,7 +44,6 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
         AttributeKey<String> key = AttributeKey.valueOf("userId");
         ctx.channel().attr(key).setIfAbsent(uid);
         // 回复消息
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器连接成功！"));
     }
 
     @Override

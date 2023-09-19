@@ -32,9 +32,16 @@
                                 </el-col>
                             </el-row>
                         </div>
-                        <n-collapse style="margin-top: 10px" @item-header-click="viewComments">
-                            <n-collapse-item :name="cat.id" title="评论">
-                                <CommentArea :CommentData="CommentData"></CommentArea>
+                        <n-collapse @item-header-click="viewComments">
+                            <n-collapse-item :name="cat.id" title="展开">
+                              <n-tabs type="line" animated>
+                                <n-tab-pane name="comment" tab="讨论">
+                                  <CommentArea :CommentData="CommentData"></CommentArea>
+                                </n-tab-pane>
+                                <n-tab-pane name="score" tab="评分">
+                                  <CommentArea :CommentData="CommentData"></CommentArea>
+                                </n-tab-pane>
+                              </n-tabs>
                             </n-collapse-item>
                         </n-collapse>
                     </div>
@@ -75,7 +82,7 @@
 </template>
 
 <script setup>
-import {NCard, NCollapse, NCollapseItem, NDescriptions, NDescriptionsItem, NRate, NScrollbar} from 'naive-ui'
+import {NTabs,NTabPane,NCard, NCollapse, NCollapseItem, NDescriptions, NDescriptionsItem, NRate, NScrollbar} from 'naive-ui'
 import {onMounted, ref, watch} from "vue";
 import {get} from "@/net";
 import {useRoute} from "vue-router";

@@ -41,6 +41,11 @@ const router = createRouter({
                     path: '/cat/cat/:page?',
                     name: 'schoolCat-index',
                     component: () => import('@/components/catIndex/SchoolCatIndex.vue')
+                },
+                {
+                    path: '/cat/search/:search?',
+                    name: 'schoolCat-search',
+                    component: () => import('@/components/catIndex/search/SearchIndex.vue')
                 }]
         }
     ]

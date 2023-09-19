@@ -3,11 +3,8 @@ package com.ranchuanyin.schoolcat.service;
 public interface PushService {
     /**
      * 推送给指定用户
-     *
-     * @param userId
-     * @param msg
      */
-    void pushMsgToOne(String userId, String msg);
+    void pushMsgToOne(String formUserId,String toUserId, String msg);
 
     /**
      * 推送给所有用户
