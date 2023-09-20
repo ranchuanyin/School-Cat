@@ -7,6 +7,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Component
+@Slf4j
 public class JWTCalibrationFilter extends OncePerRequestFilter {
     @Resource
     private JwtUtil jwtUtil;
@@ -24,7 +26,7 @@ public class JWTCalibrationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader("Authorization");
-        if (Objects.nonNull(authorization)) {
+        if (Objects.nonNull(authorization) && !authorization.isEmpty()) {
             if (jwtUtil.validate(authorization)) {
                 User user = jwtUtil.getUser(authorization);
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken

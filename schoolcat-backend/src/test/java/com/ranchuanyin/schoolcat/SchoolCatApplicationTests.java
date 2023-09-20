@@ -1,6 +1,6 @@
 package com.ranchuanyin.schoolcat;
 
-import com.ranchuanyin.schoolcat.domain.vo.CatAccountVO;
+import com.ranchuanyin.schoolcat.vo.CatAccountVO;
 import com.ranchuanyin.schoolcat.mapper.CatAccountMapper;
 import com.ranchuanyin.schoolcat.units.LoginAndRun;
 import com.ranchuanyin.schoolcat.units.OSSUnit;

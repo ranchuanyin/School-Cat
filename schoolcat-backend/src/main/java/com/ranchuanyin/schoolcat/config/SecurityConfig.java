@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.ranchuanyin.schoolcat.domain.CatAccount;
 import com.ranchuanyin.schoolcat.domain.User;
-import com.ranchuanyin.schoolcat.domain.vo.CatAccountVO;
+import com.ranchuanyin.schoolcat.vo.CatAccountVO;
 import com.ranchuanyin.schoolcat.enums.SchoolCatRedisCacheEnums;
 import com.ranchuanyin.schoolcat.filter.JWTCalibrationFilter;
 import com.ranchuanyin.schoolcat.mapper.CatAccountMapper;
@@ -94,7 +94,7 @@ public class SecurityConfig {
                 .cors().configurationSource(this.corsConfigurationSource())//配置cors跨域
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/cat/auth/**").permitAll()//配置URL不需要登录就可以访问
+                .requestMatchers("/cat/auth/**","/cat/comment/commentList").permitAll()//配置URL不需要登录就可以访问
                 .anyRequest()
                 .authenticated()
                 .and()

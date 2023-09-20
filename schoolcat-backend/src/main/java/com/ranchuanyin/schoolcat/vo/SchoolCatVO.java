@@ -1,4 +1,4 @@
-package com.ranchuanyin.schoolcat.domain.vo;
+package com.ranchuanyin.schoolcat.vo;
 
 import com.ranchuanyin.schoolcat.domain.SchoolAnimal;
 import lombok.Builder;
