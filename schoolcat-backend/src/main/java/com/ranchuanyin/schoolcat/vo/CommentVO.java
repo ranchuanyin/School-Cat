@@ -1,19 +1,17 @@
 package com.ranchuanyin.schoolcat.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentVO {
     private Long id;
-
     /**
      * 事物的id
      */
@@ -62,4 +60,10 @@ public class CommentVO {
     private Date createTime;
 
     private String userName;
+
+    private String avatar;
+
+    private List<CommentVO> children;
+
+
 }

@@ -1,9 +1,12 @@
 package com.ranchuanyin.schoolcat.service;
 
-import com.ranchuanyin.schoolcat.domain.ScComment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ranchuanyin.schoolcat.domain.ScComment;
 import com.ranchuanyin.schoolcat.dto.CommentDTO;
 import com.ranchuanyin.schoolcat.units.RestBean;
+import com.ranchuanyin.schoolcat.vo.CommentVO;
+
+import java.util.List;
 
 /**
 * @author 33716
@@ -12,5 +15,5 @@ import com.ranchuanyin.schoolcat.units.RestBean;
 */
 public interface ScCommentService extends IService<ScComment> {
 
-    RestBean commentList(CommentDTO commentDTO);
+    RestBean<List<CommentVO>> commentList(CommentDTO commentDTO);
 }

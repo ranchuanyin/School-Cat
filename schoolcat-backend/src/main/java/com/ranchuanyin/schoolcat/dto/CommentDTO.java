@@ -6,5 +6,5 @@ import lombok.Data;
 public class CommentDTO {
     private Long articleId;
     private Integer pageNum;
-    private Integer pageSize;
+    private Integer pageSize = 5;
 }

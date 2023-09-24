@@ -1,5 +1,6 @@
 package com.ranchuanyin.schoolcat.units;
 
+import com.ranchuanyin.schoolcat.vo.PageVO;
 import lombok.Data;
 
 @Data
@@ -8,6 +9,16 @@ public class RestBean<T> {
     private String message;
     private boolean success;
     private T data;
+    private PageVO page;
+
+
+    private RestBean(int status, String message, boolean success, T data, PageVO page) {
+        this.status = status;
+        this.message = message;
+        this.success = success;
+        this.data = data;
+        this.page = page;
+    }
 
     private RestBean(int status, String message, boolean success, T data) {
         this.status = status;
@@ -30,6 +41,14 @@ public class RestBean<T> {
 
     public static <T> RestBean<T> success(String message, T data) {
         return new RestBean<>(200, message, true, data);
+    }
+
+    public static <T> RestBean<T> success(String message, T data, PageVO page) {
+        return new RestBean<>(200, message, true, data, page);
+    }
+
+    public static <T> RestBean<T> success(T data, PageVO page) {
+        return new RestBean<>(200, null, true, data, page);
     }
 
 
