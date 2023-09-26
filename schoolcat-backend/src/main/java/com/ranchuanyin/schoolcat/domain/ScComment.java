@@ -1,6 +1,7 @@
 package com.ranchuanyin.schoolcat.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class ScComment implements Serializable {
      * 
      */
     @TableId(type = IdType.ASSIGN_ID)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
 
@@ -28,22 +30,26 @@ public class ScComment implements Serializable {
     /**
      * 
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long articleId;
 
     /**
      * 根评论
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long rootId;
 
     /**
      * 所回复的目标评论的userid
      */
-    private Integer toCommentUserId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Long toCommentUserId;
 
     /**
      * 回复目标评论id
      */
-    private Integer toCommentId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Long toCommentId;
 
     /**
      * 评论内容
@@ -53,6 +59,7 @@ public class ScComment implements Serializable {
     /**
      * 
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long createBy;
 
     /**
@@ -64,6 +71,7 @@ public class ScComment implements Serializable {
     /**
      * 
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long updateBy;
 
     /**

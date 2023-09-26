@@ -3,13 +3,16 @@ package com.ranchuanyin.schoolcat.units;
 import com.ranchuanyin.schoolcat.vo.PageVO;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class RestBean<T> {
+public class RestBean<T> implements Serializable {
     private int status;
     private String message;
     private boolean success;
     private T data;
     private PageVO page;
+    private static final long serialVersionUID = 1L;
 
 
     private RestBean(int status, String message, boolean success, T data, PageVO page) {

@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.ranchuanyin.schoolcat.domain.CatAccount;
 import com.ranchuanyin.schoolcat.domain.User;
-import com.ranchuanyin.schoolcat.vo.CatAccountVO;
 import com.ranchuanyin.schoolcat.enums.SchoolCatRedisCacheEnums;
 import com.ranchuanyin.schoolcat.filter.JWTCalibrationFilter;
 import com.ranchuanyin.schoolcat.mapper.CatAccountMapper;
@@ -13,6 +12,7 @@ import com.ranchuanyin.schoolcat.units.LoginAndRun;
 import com.ranchuanyin.schoolcat.units.RestBean;
 import com.ranchuanyin.schoolcat.util.JwtUtil;
 import com.ranchuanyin.schoolcat.util.RedisCache;
+import com.ranchuanyin.schoolcat.vo.CatAccountVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -149,7 +149,6 @@ public class SecurityConfig {
             loginAndRun = new LoginAndRun(user.getCatAccount().getId(), true, false);
             int i = mapper.IncreaseExperience(user.getCatAccount().getId(), 10);
             redisCache.setCacheObject(loginsAndTasks, loginAndRun, 24, TimeUnit.HOURS);
-            redisCache.incrementValue(SchoolCatRedisCacheEnums.NUMBER_OF_LOGINS, 1);
         }
         response.getWriter().write(JSONObject.toJSONString(RestBean.success("登陆成功", bean)));
     }

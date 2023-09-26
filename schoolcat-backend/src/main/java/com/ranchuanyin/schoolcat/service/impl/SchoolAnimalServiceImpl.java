@@ -7,6 +7,7 @@ import com.ranchuanyin.schoolcat.domain.SchoolAnimal;
 import com.ranchuanyin.schoolcat.mapper.SchoolAnimalMapper;
 import com.ranchuanyin.schoolcat.service.SchoolAnimalService;
 import jakarta.annotation.Resource;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class SchoolAnimalServiceImpl extends ServiceImpl<SchoolAnimalMapper, Sch
     @Resource
     private SchoolAnimalMapper schoolAnimalMapper;
 
+    @Cacheable(value = {"catList"}, key = "#page")
     public List<SchoolAnimal> paginationQuery(int page) {
         LambdaQueryWrapper<SchoolAnimal> wrapper = new LambdaQueryWrapper<>();
         Page<SchoolAnimal> schoolAnimalPage = new Page<>(page, 5);

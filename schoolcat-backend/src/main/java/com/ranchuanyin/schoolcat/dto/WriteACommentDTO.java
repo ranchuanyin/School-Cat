@@ -1,29 +1,30 @@
 package com.ranchuanyin.schoolcat.dto;
 
-import com.ranchuanyin.schoolcat.vo.CommentVO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
-import java.util.Date;
-import java.util.List;
 
 @Data
 public class WriteACommentDTO {
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long articleId;
     /**
      * 根评论
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long rootId;
 
     /**
      * 所回复的目标评论的userid
      */
-    private Integer toCommentUserId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Long toCommentUserId;
 
     /**
      * 回复目标评论id
      */
-    private Integer toCommentId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Long toCommentId;
 
     /**
      * 评论内容
@@ -33,6 +34,7 @@ public class WriteACommentDTO {
     /**
      *
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long createBy;
 
 }
