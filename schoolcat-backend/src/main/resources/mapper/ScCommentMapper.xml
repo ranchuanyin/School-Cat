@@ -6,7 +6,6 @@
 
     <resultMap id="BaseResultMap" type="com.ranchuanyin.schoolcat.domain.ScComment">
             <id property="id" column="id" jdbcType="BIGINT"/>
-            <id property="thingId" column="thing_id" jdbcType="BIGINT"/>
             <result property="type" column="type" jdbcType="CHAR"/>
             <result property="articleId" column="article_id" jdbcType="BIGINT"/>
             <result property="rootId" column="root_id" jdbcType="BIGINT"/>

@@ -3,6 +3,7 @@ package com.ranchuanyin.schoolcat.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ranchuanyin.schoolcat.domain.ScComment;
 import com.ranchuanyin.schoolcat.dto.CommentDTO;
+import com.ranchuanyin.schoolcat.dto.WriteACommentDTO;
 import com.ranchuanyin.schoolcat.units.RestBean;
 import com.ranchuanyin.schoolcat.vo.CommentVO;
 
@@ -16,4 +17,6 @@ import java.util.List;
 public interface ScCommentService extends IService<ScComment> {
 
     RestBean<List<CommentVO>> commentList(CommentDTO commentDTO);
+
+    RestBean<String> sendComment(WriteACommentDTO writeACommentDTO);
 }

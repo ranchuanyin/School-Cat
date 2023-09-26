@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ranchuanyin.schoolcat.domain.CatAccount;
 import com.ranchuanyin.schoolcat.domain.ScComment;
 import com.ranchuanyin.schoolcat.dto.CommentDTO;
+import com.ranchuanyin.schoolcat.dto.WriteACommentDTO;
 import com.ranchuanyin.schoolcat.mapper.ScCommentMapper;
 import com.ranchuanyin.schoolcat.service.CatAccountService;
 import com.ranchuanyin.schoolcat.service.ScCommentService;
@@ -30,6 +31,10 @@ public class ScCommentServiceImpl extends ServiceImpl<ScCommentMapper, ScComment
     @Resource
     CatAccountService catAccountService;
 
+    @Resource
+    ScCommentMapper scCommentMapper;
+
+
     @Override
     public RestBean<List<CommentVO>> commentList(CommentDTO commentDTO) {
         LambdaQueryWrapper<ScComment> wrapper = new LambdaQueryWrapper<>();
@@ -47,9 +52,19 @@ public class ScCommentServiceImpl extends ServiceImpl<ScCommentMapper, ScComment
         return RestBean.success(list, pageVO);
     }
 
+    @Override
+    public RestBean<String> sendComment(WriteACommentDTO writeACommentDTO) {
+        ScComment bean = BeanUtil.toBean(writeACommentDTO, ScComment.class);
+        int save = scCommentMapper.insert(bean);
+        if (save != 0){
+            return RestBean.success("评论成功");
+        }else return RestBean.failure(500,"评论失败");
+
+    }
+
     private List<CommentVO> getChildren(Long id) {
         LambdaQueryWrapper<ScComment> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(ScComment::getRootId, id).orderByAsc(ScComment::getCreateTime).last("limit 0,3");
+        wrapper.eq(ScComment::getRootId, id).orderByAsc(ScComment::getCreateTime);
         return toCommentVOList(list(wrapper));
     }
 

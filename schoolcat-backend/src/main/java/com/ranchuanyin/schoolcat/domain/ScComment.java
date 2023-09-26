@@ -1,9 +1,6 @@
 package com.ranchuanyin.schoolcat.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,13 +16,9 @@ public class ScComment implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
-    /**
-     * 事物的id
-     */
-    private Long thingId;
 
     /**
      * 评论类型（暂时）
@@ -65,6 +58,7 @@ public class ScComment implements Serializable {
     /**
      * 
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**

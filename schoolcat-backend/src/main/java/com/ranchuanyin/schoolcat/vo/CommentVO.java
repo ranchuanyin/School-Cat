@@ -13,11 +13,6 @@ import java.util.List;
 public class CommentVO {
     private Long id;
     /**
-     * 事物的id
-     */
-    private Long thingId;
-
-    /**
      * 评论类型（暂时）
      */
     private String type;
@@ -26,7 +21,6 @@ public class CommentVO {
      *
      */
     private Long articleId;
-
     /**
      * 根评论
      */
