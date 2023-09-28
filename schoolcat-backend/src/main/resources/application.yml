@@ -4,7 +4,7 @@ spring:
   datasource:
     username: root
     password: 1213707943
-    url: jdbc:mysql://43.138.61.70:3306/school_cat?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://116.204.133.43:3306/school_cat?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
     hikari:
       max-lifetime: 120000
   main:
@@ -24,7 +24,7 @@ spring:
     auto: true
   data:
     redis:
-      host: 43.138.61.70         # Redis服务器地址
+      host: 116.204.133.43         # Redis服务器地址
       port: 6379              # Redis服务器连接端口
       password: 1213707943
       database: 0
