@@ -5,6 +5,8 @@ services: #services里面就是我们所有需要进行编排的服务了
     build: .
     ports:
       - "8080:8080"
+      - "8443:8443"
+      - "58080:58080"
     depends_on: #这里设置一下依赖，需要等待mysql启动后才运行，但是没啥用，这个并不是等到启动完成后，而是进程建立就停止等待
       - mysql
     restart: always  #这里配置容器停止后自动重启
@@ -30,3 +32,14 @@ services: #services里面就是我们所有需要进行编排的服务了
     command: redis-server --requirepass 1213707943
     ports:
       - "6379:6379"
+  nginx:
+    container_name: app_nginx
+    image: nginx:latest
+    volumes:
+      - /home/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/nginx/www.ourcats.top.pem:/etc/nginx/www.ourcats.top.pem
+      - /home/nginx/www.ourcats.top.key:/etc/nginx/www.ourcats.top.key
+      - /home:/home
+    ports:
+      - "443:443"
+      - "80:80"

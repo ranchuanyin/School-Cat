@@ -1,9 +1,7 @@
 package com.ranchuanyin.schoolcat.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -12,6 +10,9 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
@@ -83,6 +84,8 @@ public class NettyServer {
                 2、这就是为什么，当浏览器发送大量数据时，就会发送多次http请求
                  */
                 ch.pipeline().addLast(new HttpObjectAggregator(8192));
+                ch.pipeline().addLast(new IdleStateHandler(0, 0, 60)); // 60秒没有读写则触发心跳
+                ch.pipeline().addLast(new HeartbeatHandler());
                 /*
                 说明：
                 1、对应webSocket，它的数据是以帧（frame）的形式传递
@@ -128,6 +131,20 @@ public class NettyServer {
                 e.printStackTrace();
             }
         }).start();
+    }
+}
+
+class HeartbeatHandler extends ChannelInboundHandlerAdapter {
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent event = (IdleStateEvent) evt;
+            if (event.state() == IdleState.READER_IDLE) {
+                // 客户端长时间没有读取数据，关闭连接
+                ctx.close();
+            }
+        }
     }
 }
 

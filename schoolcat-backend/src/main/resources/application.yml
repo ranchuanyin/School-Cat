@@ -1,10 +1,15 @@
+server:
+  ssl:
+    key-store: classpath:www.ourcats.top.jks
+    keyStoreType: JKS
+    key-store-password: o08vdu7b
 spring:
   cache:
     type: redis
   datasource:
     username: root
     password: 1213707943
-    url: jdbc:mysql://116.204.133.43:3306/school_cat?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://116.204.133.43:3306/school_cat?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
     hikari:
       max-lifetime: 120000
   main:

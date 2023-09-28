@@ -2,7 +2,7 @@
     <div class="common-layout">
         <el-container>
             <div>
-                <el-aside class="hidden-sm-and-down" width="auto">
+                <el-aside width="auto">
                     <Menu></Menu>
                 </el-aside>
             </div>
@@ -36,7 +36,7 @@ const messageList = ref([])
 let socket;
 // 判断当前浏览器是否支持webSocket
 if(window.WebSocket){
-  socket = new WebSocket("ws://127.0.0.1:58080/webSocket")
+  socket = new WebSocket("wss://www.ourcats.top/websocket")
   // 相当于channel的read事件，ev 收到服务器回送的消息
   socket.onmessage = function (ev) {
     messageList.value.push(JSON.parse(ev.data))
@@ -54,23 +54,6 @@ if(window.WebSocket){
   // 相当于连接关闭
   socket.onclose = function (ev) {
     console.log("连接关闭了...")
-    console.log("正在尝试重连...")
-    setTimeout(function(){
-      try {
-        socket = new WebSocket("ws://127.0.0.1:58080/webSocket")
-        socket.onopen = function (ev) {
-          console.log("连接开启了...")
-          socket.send(
-              JSON.stringify({
-                // 连接成功将，用户ID传给服务端
-                uid: store.auth.user.id
-              })
-          );
-        }
-      }catch (e){
-        ElMessage.error("WebSocket连接失败")
-      }
-    }, 1000*30);
   }
 }else{
   alert("当前浏览器不支持webSocket")
