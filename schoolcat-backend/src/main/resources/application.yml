@@ -1,8 +1,3 @@
-server:
-  ssl:
-    key-store: classpath:www.ourcats.top.jks
-    keyStoreType: JKS
-    key-store-password: o08vdu7b
 spring:
   cache:
     type: redis

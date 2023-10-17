@@ -16,7 +16,7 @@ app.use(ElementPlus, {
     locale: zhCn,
 })
 
-axios.defaults.baseURL = "https://www.ourcats.top:8080"
+axios.defaults.baseURL = "http://localhost:8080"
 axios.defaults.headers.common["Authorization"] = localStorage.getItem("SCHOOL_CAT_TOKEN")
 
 app.use(createPinia().use(piniaPluginPersistedstate))
