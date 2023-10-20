@@ -20,21 +20,40 @@
                       p-id="5324"></path>
             </svg>
         </el-icon>
-        <span>猫</span>
+        <span>猫档案</span>
+      </el-menu-item>
+      <el-menu-item index="6">
+        <el-icon>
+          <document/>
+        </el-icon>
+        <span>猫咪小报</span>
       </el-menu-item>
       <el-menu-item index="2">
         <el-icon>
           <document/>
         </el-icon>
-        <span>问答</span>
+        <span>猫友论坛</span>
       </el-menu-item>
       <el-menu-item index="3">
         <el-icon>
           <document/>
         </el-icon>
-        <span>用户</span>
+        <span>猫友家庭</span>
       </el-menu-item>
       <el-menu-item index="4">
+        <el-icon>
+          <document/>
+        </el-icon>
+        <span>公益活动</span>
+      </el-menu-item>
+      <el-menu-item index="5">
+        <el-icon>
+          <document/>
+        </el-icon>
+        <span>爪印画廊</span>
+      </el-menu-item>
+
+      <el-menu-item index="7" @click="router.push('/cat/user')">
         <el-icon>
           <setting/>
         </el-icon>
@@ -43,7 +62,7 @@
     </el-menu>
 
     <el-row align="top" style="width: 60px;">
-      <el-col style="height: 35vh;width: 0;">
+      <el-col style="height: 10vh;width: 0;">
       </el-col>
 
       <el-col>

@@ -1,6 +1,6 @@
 <template>
-    <el-container>
-        <el-main id="context">
+  <el-container v-loading="loading">
+    <el-main id="context" style="min-height: 500px">
             <el-row v-for="cat in CatList" :key="cat.id">
                 <el-col :span="20">
                     <div class="cat-business-card">
@@ -82,13 +82,24 @@
 </template>
 
 <script setup>
-import {NTabs,NTabPane,NCard, NCollapse, NCollapseItem, NDescriptions, NDescriptionsItem, NRate, NScrollbar} from 'naive-ui'
+import {
+  NCard,
+  NCollapse,
+  NCollapseItem,
+  NDescriptions,
+  NDescriptionsItem,
+  NRate,
+  NScrollbar,
+  NTabPane,
+  NTabs
+} from 'naive-ui'
 import {onMounted, ref, watch} from "vue";
 import {get} from "@/net";
 import {useRoute} from "vue-router";
 import router from "@/router";
 import CommentArea from "@/components/catIndex/catIndexComp/CommentArea.vue";
 
+const loading = ref(true)
 const CatList = ref()
 const CatNums = ref(0)
 
@@ -108,12 +119,16 @@ watch(
 onMounted(() => {
     if (isNaN(currentPage.value)) {
         currentPage.value = 1
+      loading.value = false
     }
     get('/cat/cat/num', (data) => {
         CatNums.value = data.data
+      loading.value = false
+
     })
     get(`/cat/cat/${currentPage.value}`, (data) => {
         CatList.value = data.data
+      loading.value = false
     })
 })
 
@@ -122,6 +137,7 @@ const paginationQuery = (val) => {
     currentPage.value = val
     get(`/cat/cat/${val}`, (data) => {
         CatList.value = data.data
+      loading.value = false
     })
 }
 

@@ -28,7 +28,8 @@ const router = createRouter({
                     component: () => import('@/components/welcome/ForgetPage.vue')
                 }
             ]
-        }, {
+        },
+        {
             path: '/cat',
             name: 'index',
             component: () => import("@/views/Index.vue"),
@@ -46,8 +47,15 @@ const router = createRouter({
                     path: '/cat/search/:search?',
                     name: 'schoolCat-search',
                     component: () => import('@/components/catIndex/search/SearchIndex.vue')
-                }]
+                },
+                {
+                    path: '/cat/user',
+                    name: 'userIndex',
+                    component: () => import("@/views/Setting.vue")
+                }
+            ]
         }
+
     ]
 })
 

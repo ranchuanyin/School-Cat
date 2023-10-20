@@ -2,6 +2,7 @@ package com.ranchuanyin.schoolcat.controller;
 
 import com.ranchuanyin.schoolcat.dto.SendMessageDto;
 import com.ranchuanyin.schoolcat.service.PushService;
+import com.ranchuanyin.schoolcat.units.RestBean;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class PushController {
     @Resource
     private PushService pushService;
+
 
     /**
      * 推送给所有用户
@@ -23,8 +25,13 @@ public class PushController {
      * 推送给指定用户
      */
     @PostMapping("/pushOne")
-    public void pushMsgToOne(@RequestBody SendMessageDto sendMessageDto){
-        pushService.pushMsgToOne(sendMessageDto.getFromUserId(),sendMessageDto.getToUserId(),sendMessageDto.getMessage());
+    public RestBean<String> pushMsgToOne(@RequestBody SendMessageDto sendMessageDto) {
+        Boolean ok = pushService.pushMsgToOne(sendMessageDto.getFromUserId(), sendMessageDto.getToUserId(), sendMessageDto.getMessage());
+        if (ok) {
+            return RestBean.success("联系成功");
+        } else {
+            return RestBean.failure(200, "联系方不在线，转离线消息");
+        }
     }
 
 }

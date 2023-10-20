@@ -12,7 +12,12 @@ public class NettyConfig {
     /**
      * -- GETTER --
      *  获取channel组
+     * -- GETTER --
+     *  获取channel组
+     *
+     * @return
      */
+
     @Getter
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
@@ -21,13 +26,20 @@ public class NettyConfig {
      * -- GETTER --
      *  获取用户channel map
      *
-     * @return
+     *
+     * -- GETTER --
+     *  获取用户channel map
+     *
+     @return
+      * @return
 
      */
+
     @Getter
     private static ConcurrentHashMap<String, Channel> userChannelMap = new ConcurrentHashMap<>();
 
     private NettyConfig() {
     }
+
 
 }

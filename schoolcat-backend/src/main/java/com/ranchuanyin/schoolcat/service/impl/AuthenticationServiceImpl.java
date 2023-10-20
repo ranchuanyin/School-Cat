@@ -5,7 +5,6 @@ import com.ranchuanyin.schoolcat.domain.CatAccount;
 import com.ranchuanyin.schoolcat.domain.User;
 import com.ranchuanyin.schoolcat.mapper.CatAccountMapper;
 import com.ranchuanyin.schoolcat.service.AuthenticationService;
-import com.ranchuanyin.schoolcat.util.RedisCache;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -25,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
+
     private final CatAccountMapper catAccountMapper;
     @Value("${spring.mail.username}")
     String fromMail;
@@ -33,8 +33,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Resource
     MailSender mailSender;
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    @Resource
-    private RedisCache redisCache;
 
     public AuthenticationServiceImpl(CatAccountMapper catAccountMapper) {
         this.catAccountMapper = catAccountMapper;
@@ -42,7 +40,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (username == null || username.length() == 0) {
+        if (username == null || username.isEmpty()) {
             throw new UsernameNotFoundException("用户名不能为空");
         }
         LambdaQueryWrapper<CatAccount> queryWrapper = new LambdaQueryWrapper<>();

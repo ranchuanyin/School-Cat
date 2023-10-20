@@ -15,6 +15,7 @@ import com.ranchuanyin.schoolcat.units.RestBean;
 import com.ranchuanyin.schoolcat.vo.CommentVO;
 import com.ranchuanyin.schoolcat.vo.PageVO;
 import jakarta.annotation.Resource;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class ScCommentServiceImpl extends ServiceImpl<ScCommentMapper, ScComment
 
 
     @Override
+    @Cacheable(value = {"commentList"}, key = "#commentDTO.articleId")
     public RestBean<List<CommentVO>> commentList(CommentDTO commentDTO) {
         LambdaQueryWrapper<ScComment> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(ScComment::getArticleId, commentDTO.getArticleId())

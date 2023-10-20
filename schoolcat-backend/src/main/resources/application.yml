@@ -1,6 +1,8 @@
 spring:
   cache:
     type: redis
+    redis:
+      time-to-live: 60000
   datasource:
     username: root
     password: 1213707943
@@ -28,6 +30,7 @@ spring:
       port: 6379              # Redis服务器连接端口
       password: 1213707943
       database: 0
+      timeout: 2000
   devtools:
     restart:
       enabled: true
@@ -35,6 +38,11 @@ spring:
       exclude: WEB-INF/**
     freemarker:
       cache: false
+  rabbitmq:
+    addresses: 116.204.133.43
+    username: guest
+    password: guest
+    virtual-host: /
 
 
 mybatis-plus:

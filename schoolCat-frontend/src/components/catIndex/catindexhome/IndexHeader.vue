@@ -5,7 +5,8 @@
         </el-col>
         <el-col :span="8" style="margin-top: 10px;">
                 <label for="search">Search</label>
-                <input @keyup.enter="router.push(`/cat/search/${searchValue}`)" id="search" v-model="searchValue" class="input" pattern=".*\S.*" required="" type="search">
+          <input id="search" v-model="searchValue" class="input"
+                 pattern=".*\S.*" required="" type="search" @keyup.enter="router.push(`/cat/search/${searchValue}`)">
                 <span class="caret"></span>
         </el-col>
 
@@ -148,13 +149,14 @@
 </template>
 
 <script setup>
-import {NSwitch,NBadge} from "naive-ui"
-import {onMounted, ref,watch} from 'vue'
+import {NBadge, NSwitch} from "naive-ui"
+import {onMounted, ref, watch} from 'vue'
 import {SwitchButton} from '@element-plus/icons-vue'
 import {get} from "@/net";
 import {ElMessage} from "element-plus";
 import router from "@/router";
 import {useStore} from "@/stores";
+
 const props = defineProps(["messageList"])
 const messageList = props.messageList
 
