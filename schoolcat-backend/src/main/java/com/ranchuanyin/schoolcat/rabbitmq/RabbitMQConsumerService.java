@@ -1,4 +1,4 @@
-package com.ranchuanyin.schoolcat.service;
+package com.ranchuanyin.schoolcat.rabbitmq;
 
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
@@ -15,7 +15,7 @@ import java.util.List;
 public class RabbitMQConsumerService {
 
 
-    public List<ReceiveMessagesVo> consumeMessages() {
+    public List<ReceiveMessagesVo> consumeMessages(Long id) {
         // 从队列中获取并消费消息
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("116.204.133.43"); // RabbitMQ 服务器地址
@@ -32,18 +32,24 @@ public class RabbitMQConsumerService {
                 if (response != null) {
                     byte[] body = response.getBody();
                     ReceiveMessagesVo o = JSONObject.parseObject(body, ReceiveMessagesVo.class);
-                    list.add(o);
-                    // 手动确认消息的消费
                     long deliveryTag = response.getEnvelope().getDeliveryTag();
-                    channel.basicAck(deliveryTag, false);
+                    if (o.getToUserId().equals(id)) {
+                        list.add(o);
+                        // 手动确认消息的消费
+                        channel.basicAck(deliveryTag, false);
+                    } else
+                        channel.basicReject(deliveryTag, true);
                 } else {
+
                     break;
                 }
             }
+            channel.close();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }

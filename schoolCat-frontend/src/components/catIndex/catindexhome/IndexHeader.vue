@@ -162,7 +162,8 @@ const messageList = props.messageList
 
 watch(
     () => messageList.length,
-    () => console.log(messageList)
+    () => {
+    }
 )
 
 const store = useStore()

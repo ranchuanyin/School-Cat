@@ -1,10 +1,7 @@
 package com.ranchuanyin.schoolcat.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.BoundSetOperations;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -227,4 +224,21 @@ public class RedisCache {
     public Collection<String> keys(final String pattern) {
         return redisTemplate.keys(pattern);
     }
+
+
+    /**
+     * 判断key是否存在
+     *
+     * @param key
+     * @return
+     */
+    public boolean exists(String key) {
+        return Boolean.TRUE.equals(redisTemplate.hasKey(key));
+    }
+
+    public void deleteList(String key) {
+        ListOperations<String, String> listOperations = redisTemplate.opsForList();
+        listOperations.getOperations().delete(key);
+    }
+
 }

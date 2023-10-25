@@ -16,16 +16,19 @@ const router = createRouter({
                 {
                     path: '',
                     name: 'welcome-login',
-                    component: LoginPage
+                    component: LoginPage,
+                    meta: {keepAlive: true}
                 }, {
                     path: 'register',
                     name: 'welcome-register',
-                    component: RegisterPage
+                    component: RegisterPage,
+                    meta: {keepAlive: true}
                 },
                 {
                     path: 'forget',
                     name: 'welcome-forget',
-                    component: () => import('@/components/welcome/ForgetPage.vue')
+                    component: () => import('@/components/welcome/ForgetPage.vue'),
+                    meta: {keepAlive: true}
                 }
             ]
         },
@@ -63,7 +66,7 @@ router.beforeEach((to, from, next) => {
     const store = useStore()
     if (store.auth.user != null && to.name.startsWith('welcome-')) {
         next('/cat')
-    } else if (store.auth.user == null && to.fullPath.startsWith('/cat')) {
+    } else if ((store.auth.user == null) && to.fullPath.startsWith('/cat')) {
         next('/')
     } else if (to.matched.length === 0) {
         next('/cat')

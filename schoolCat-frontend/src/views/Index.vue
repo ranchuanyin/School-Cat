@@ -26,6 +26,9 @@ import Menu from "@/components/catIndex/catindexhome/IndexMenu.vue";
 import IndexHeader from "@/components/catIndex/catindexhome/IndexHeader.vue";
 import {onMounted, ref} from "vue";
 import {useStore} from "@/stores"
+import {get, post} from "@/net";
+import {ElMessage} from "element-plus";
+import router from "@/router";
 
 const store = useStore();
 const messageList = ref([])
@@ -37,10 +40,12 @@ let socket;
 onMounted(
     () => {
       websocketConnect()
+      getMessage()
     }
 )
 
 const websocketConnect = () => {
+
   if (window.WebSocket) {
     socket = new WebSocket("ws://127.0.0.1:58080/webSocket")
     // 相当于channel的read事件，ev 收到服务器回送的消息
@@ -64,6 +69,15 @@ const websocketConnect = () => {
   } else {
     alert("当前浏览器不支持webSocket")
   }
+}
+
+const getMessage = () => {
+  get(`/cat/auth/message/${store.auth.user.id}`, (data) => {
+
+  }, (data) => {
+
+  })
+
 }
 
 

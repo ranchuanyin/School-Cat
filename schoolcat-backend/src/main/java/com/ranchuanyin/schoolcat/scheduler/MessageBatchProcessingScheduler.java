@@ -1,7 +1,8 @@
+/*
 package com.ranchuanyin.schoolcat.scheduler;
 
 import com.ranchuanyin.schoolcat.domain.ReceiveMessagesVo;
-import com.ranchuanyin.schoolcat.service.RabbitMQConsumerService;
+import com.ranchuanyin.schoolcat.rabbitmq.RabbitMQConsumerService;
 import com.ranchuanyin.schoolcat.service.ReceiveMessagesVoService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -24,3 +25,4 @@ public class MessageBatchProcessingScheduler {
         receiveMessagesVoService.saveBatch(receiveMessagesVos);
     }
 }
+*/

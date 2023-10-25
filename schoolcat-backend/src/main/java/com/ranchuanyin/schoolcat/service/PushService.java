@@ -8,7 +8,7 @@ public interface PushService {
     /**
      * 推送给指定用户
      */
-    Boolean pushMsgToOne(String formUserId, String toUserId, String msg);
+    Boolean pushMsgToOne(String formUserId, String toUserId, String msg, String username, String avatar);
 
     Boolean pushMsgToOne(String toUserId, List<ReceiveMessagesVo> list);
 

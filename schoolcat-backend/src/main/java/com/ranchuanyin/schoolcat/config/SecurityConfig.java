@@ -55,6 +55,9 @@ public class SecurityConfig {
     private CatAccountMapper mapper;
 
     @Resource
+    CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
+    @Resource
     private JwtUtil jwtUtil;
 
     @Resource
@@ -94,7 +97,7 @@ public class SecurityConfig {
                 .cors().configurationSource(this.corsConfigurationSource())//配置cors跨域
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/cat/auth/**","/cat/comment/commentList").permitAll()//配置URL不需要登录就可以访问
+                .requestMatchers("/cat/auth/**", "/cat/message/**").permitAll()//配置URL不需要登录就可以访问
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -103,7 +106,7 @@ public class SecurityConfig {
                 .failureHandler(this::onAuthenticationFailure)//配置失败信息
                 .and()
                 .exceptionHandling()//配置同一异常
-                .authenticationEntryPoint(this::onAuthenticationFailure)
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
                 .and()
                 .logout().logoutUrl("/cat/auth/logout")
                 .logoutSuccessHandler(this::onLogOutOfLogin)
@@ -165,3 +168,5 @@ public class SecurityConfig {
         response.getWriter().write(JSONObject.toJSONString(RestBean.failure(401, exception.getMessage())));
     }
 }
+
+

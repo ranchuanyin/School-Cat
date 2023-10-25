@@ -26,7 +26,7 @@ public class PushController {
      */
     @PostMapping("/pushOne")
     public RestBean<String> pushMsgToOne(@RequestBody SendMessageDto sendMessageDto) {
-        Boolean ok = pushService.pushMsgToOne(sendMessageDto.getFromUserId(), sendMessageDto.getToUserId(), sendMessageDto.getMessage());
+        Boolean ok = pushService.pushMsgToOne(sendMessageDto.getFromUserId(), sendMessageDto.getToUserId(), sendMessageDto.getMessage(), sendMessageDto.getUsername(), sendMessageDto.getAvatar());
         if (ok) {
             return RestBean.success("联系成功");
         } else {

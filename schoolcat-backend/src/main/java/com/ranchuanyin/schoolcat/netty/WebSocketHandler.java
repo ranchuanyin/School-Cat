@@ -2,9 +2,8 @@ package com.ranchuanyin.schoolcat.netty;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.alibaba.fastjson.JSON;
 import com.ranchuanyin.schoolcat.config.NettyConfig;
-import com.ranchuanyin.schoolcat.domain.ReceiveMessagesVo;
 import com.ranchuanyin.schoolcat.mapper.ReceiveMessagesVoMapper;
 import com.ranchuanyin.schoolcat.service.impl.PushServiceImpl;
 import io.netty.channel.ChannelHandler;
@@ -16,8 +15,6 @@ import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @ChannelHandler.Sharable
@@ -54,10 +51,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
         // 将用户ID作为自定义属性加入到channel中，方便随时channel中获取用户ID
         AttributeKey<String> key = AttributeKey.valueOf("userId");
         ctx.channel().attr(key).setIfAbsent(uid);
-        LambdaQueryWrapper<ReceiveMessagesVo> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(ReceiveMessagesVo::getToUserId, Long.valueOf(uid));
-        List<ReceiveMessagesVo> receiveMessagesVos = receiveMessagesVoMapper.selectList(wrapper);
-        pushService.pushMsgToOne(uid, receiveMessagesVos);
+        ctx.channel().writeAndFlush(new TextWebSocketFrame(JSON.toJSONString("已开启连接")));
     }
 
     @Override

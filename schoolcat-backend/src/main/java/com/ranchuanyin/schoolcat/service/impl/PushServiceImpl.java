@@ -5,10 +5,10 @@ import com.alibaba.fastjson.JSON;
 import com.ranchuanyin.schoolcat.config.NettyConfig;
 import com.ranchuanyin.schoolcat.domain.ReceiveMessagesVo;
 import com.ranchuanyin.schoolcat.service.PushService;
+import com.ranchuanyin.schoolcat.util.RedisMessageUtil;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import jakarta.annotation.Resource;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,23 +19,24 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class PushServiceImpl implements PushService {
     @Resource
-    RabbitTemplate template;
+    RedisMessageUtil redisMessageUtil;
 
 
     @Override
-    public Boolean pushMsgToOne(String formUserId, String toUserId, String msg) {
+    public Boolean pushMsgToOne(String formUserId, String toUserId, String msg, String username, String avatar) {
         ConcurrentHashMap<String, Channel> userChannelMap = NettyConfig.getUserChannelMap();
-
+        List<ReceiveMessagesVo> list = new ArrayList<>();
         Channel channel = userChannelMap.get(toUserId);
         ReceiveMessagesVo vo = new ReceiveMessagesVo();
         vo.setMessage(msg);
+        vo.setUsername(username);
+        vo.setAvatar(avatar);
         vo.setToUserId(Long.valueOf(toUserId));
         vo.setFromUserId(Long.valueOf(formUserId));
         vo.setMessageDate(DateUtil.now());
-        List<ReceiveMessagesVo> list = new ArrayList<>();
         list.add(vo);
         if (Objects.isNull(channel)) {
-            template.convertAndSend("message-mqtt", "message-push", vo);
+            redisMessageUtil.addOfflineMessage(Long.valueOf(toUserId), vo);
             return false;
         }
         channel.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(list)));

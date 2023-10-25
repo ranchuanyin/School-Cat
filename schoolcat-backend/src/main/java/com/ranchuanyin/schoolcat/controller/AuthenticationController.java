@@ -1,17 +1,21 @@
 package com.ranchuanyin.schoolcat.controller;
 
+import com.ranchuanyin.schoolcat.domain.ReceiveMessagesVo;
 import com.ranchuanyin.schoolcat.service.AuthenticationService;
+import com.ranchuanyin.schoolcat.service.PushService;
 import com.ranchuanyin.schoolcat.units.RestBean;
 import com.ranchuanyin.schoolcat.util.RedisCache;
+import com.ranchuanyin.schoolcat.util.RedisMessageUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 @Validated
 @RestController
@@ -25,8 +29,20 @@ public class AuthenticationController {
     @Resource
     private RedisCache redisCache;
 
+    @Resource
+    RedisMessageUtil redisMessageUtil;
+    @Resource
+    PushService pushService;
+
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
+    }
+
+    @GetMapping("/message/{id}")
+    public void message(@PathVariable String id) throws IOException, TimeoutException, InterruptedException {
+        List<ReceiveMessagesVo> receiveMessagesVos = redisMessageUtil.getOfflineMessage(Long.valueOf(id));
+        Thread.sleep(2000);
+        pushService.pushMsgToOne(id, receiveMessagesVos);
     }
 
     @PostMapping("/del-redis")

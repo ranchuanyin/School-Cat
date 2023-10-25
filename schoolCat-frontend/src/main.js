@@ -8,7 +8,6 @@ import 'element-plus/theme-chalk/display.css'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import ElementPlus, {ElMessage} from 'element-plus'
-import {useStore} from "@/stores";
 
 
 const app = createApp(App)
@@ -21,5 +20,6 @@ axios.defaults.headers.common["Authorization"] = localStorage.getItem("SCHOOL_CA
 
 app.use(createPinia().use(piniaPluginPersistedstate))
 app.use(router)
+
 app.mount('#app')
 

@@ -34,6 +34,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     MailSender mailSender;
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+
     public AuthenticationServiceImpl(CatAccountMapper catAccountMapper) {
         this.catAccountMapper = catAccountMapper;
     }
@@ -72,7 +73,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         message.setText("验证码：" + code + "  " + "验证码5分钟内有效");
         try {
             mailSender.send(message);
-            stringRedisTemplate.opsForValue().set(key, String.valueOf(code));
+            stringRedisTemplate.opsForValue().set(key, String.valueOf(code), 5, TimeUnit.MINUTES);
             return null;
         } catch (MailException e) {
             e.printStackTrace();
